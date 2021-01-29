@@ -1,0 +1,100 @@
+const DEBUGGING = 0;
+DEBUGGING && view.connectToInspector && view.connectToInspector(rootElement, inspectorIpAddress);
+
+// Día en Español
+function day(num) {
+  return [
+    'Domingo', 
+    'Lunes', 
+    'Martes', 
+    'Miércoles', 
+    'Jueves', 
+    'Viernes', 
+    'Sábado'
+  ][num];
+}
+
+// Mes
+function month(num) {
+  return [
+    'Enero', 
+    'Febrero', 
+    'Marzo', 
+    'Abril', 
+    'Mayo', 
+    'Junio', 
+    'Julio', 
+    'Agosto', 
+    'Septiembre', 
+    'Octubre', 
+    'Noviembre', 
+    'Diciembre'
+  ][num];
+}
+
+function generateTask(newTask) {
+  const presentableDate = String.$({newTask.date.day} de {month(newTask.date.month)} de {newTask.date.year});
+  const newTaskTemplate = String.$(
+    <div class="p-2">
+    <div class="card text-center p-1">
+        <div class="card-header">
+          <h5 class="card-title">{newTask.name}</h5>
+        </div>
+        <div class="card-body">
+          {newTask.subject}
+          <hr>
+          {newTask.description}
+          <hr>
+          {presentableDate}
+          <hr>
+          {day(newTask.date.dayOfWeek)} {newTask.date.hour}:{newTask.date.minute}
+        </div>
+        <div class="card-footer">
+          <button .borrar class="button button-danger button-sm">
+            BORRAR
+          </button>
+        </div>
+    </div>
+  </div>);
+  return newTaskTemplate;
+}
+
+function createTarea(arguments) {
+  const newTask = {
+    name: arguments.name,
+    subject: arguments.subject,
+    description: arguments.description,
+    date: arguments.date
+  };
+  const html = generateTask(newTask);
+  $(#container).html += html;
+  arguments.view.close();
+}
+
+$(#nueva-tarea) << event click {
+  const popup = view.window({ 
+    type: View.TOOL_WINDOW,
+    caption: "Popup",
+    url: self.url("popup/popup.htm"),
+    parameters: {
+      callbacks: {
+        createTarea: createTarea
+      }
+     }
+  });
+}
+
+$(#salir) << event click {
+  view.close();
+}
+
+event click $(.borrar) (evt) {
+  evt.target.parent.parent.parent.remove();
+}
+
+$(#acerca-de) << event click {
+  view.msgbox(
+    #information,
+    "This application uses Sciter Engine (https://sciter.com), © Terra Informatica Software, Inc."
+  );
+}

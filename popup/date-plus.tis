@@ -1,0 +1,84 @@
+
+
+class DateRange : Element 
+{
+  this var start = new Date();
+  this var pstart = new Date();
+  this var showTime = true;
+  this var invalid = true;
+
+  function attached() {
+    this.showTime = this.attributes.exists("time");
+    this.content(
+      this.vcaption(),
+      <b class="popup" />,
+      this.vpopup());
+    this.state.invalid = true;
+  }
+
+  function vcaption() {
+    var fmt = this.showTime 
+      ? function(dt) { return dt.toLocaleString(#date) + " " + dt.toLocaleString(#time); }
+      : function(dt) { return dt.toLocaleString(#date); };
+
+    return <caption>
+      <span.start.date>{fmt(this.start)}</span>
+  
+    </caption>;
+  }
+
+  function vpopup() 
+  {
+    var andTime = this.showTime;
+    const timeStart = () => andTime ? <input|time :value={this.pstart}/> : []; 
+    return <popup>
+      <div.start><widget|calendar :value={this.pstart}/>{ timeStart() } </div>
+      
+    </popup>;
+  }
+/* <footer><button.apply>Apply</button><button.cancel>Cancel</button></footer>*/
+
+
+  function updateCaption() {
+    this.$(caption).merge(this.vcaption());
+  }
+
+  property value(v) {
+    get return [this.start];
+    set {
+      this.start = v[0];
+      this.post(updateCaption);
+    }
+  }
+
+  event click $(b.popup, caption) {
+    if( !this.state.ownspopup ) {
+      this.pstart = this.start;
+      var popup = this.$(popup);
+      popup.merge(this.vpopup());
+      this.popup(popup);
+    }
+  }
+
+  function onControlEvent(evt) {
+    if(evt.type == Event.POPUP_DISMISSED) {
+      var date = this.$(div.start widget).value;
+      if(this.showTime) { 
+        var time = this.$(div.start input).value;
+        date = Date.local(date.year,date.month,date.day,time.hour,time.minute,time.second);
+      }
+      this.pstart = date; 
+      this.start = this.pstart;
+      this.post(updateCaption);
+      this.postEvent("change");
+      return true;
+    }
+  }
+
+
+  event click $(popup .cancel) (evt,button) {
+    button.closePopup();
+    return true;
+  }
+
+}

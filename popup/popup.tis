@@ -1,0 +1,18 @@
+function self.ready() {
+  const w = 400dip;
+  const h = 400dip;
+  const (sw, sh) = view.screenBox(#frame, #dimension);
+  view.move((sw / 2) - (w / 2), (sh / 2) - (h / 2), w, h, 1);
+  view.windowResizable = true;
+}
+
+$(#aceptar) << event click {
+  const arguments = {
+    name: $(#name).value,
+    subject: $(#subject).value,
+    description: $(#description).value,
+    date: $(input[type=date-range]).start,
+    view: view
+  };
+  view.parameters.callbacks.createTarea(arguments);
+}

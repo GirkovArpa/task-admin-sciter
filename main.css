@@ -1,0 +1,163 @@
+.button {
+  transition: border-color quad-in-out .15s, box-shadow quad-in-out .15s;
+  cursor: pointer;
+  style-set: std-button-base;
+  display: inline-block;
+  font-weight: 600;
+  color: #55595c;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 0 solid transparent;
+  padding: .75rem 1.5rem;
+  font-size: .875rem;
+  line-height: 1.5rem;
+  border-radius: 0;
+  transition: color .15s quad-in-out, outline-color .15s quad-in-out, outline-color .15s quad-in-out, box-shadow .15s quad-in-out
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #55595c;
+  text-align: left;
+  background-color: #fff;
+}
+
+hr {
+  border-color: #E5E5E5;
+}
+
+#container {
+  flow: horizontal-wrap;
+  size: *;
+}
+
+.p-2 {
+  padding: .5rem !important;
+  width: max-content;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex: vertical;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125)
+}
+
+.card>hr {
+  margin-right: 0;
+  margin-left: 0
+}
+
+.card>.list-group {
+  border-top: inherit;
+  border-bottom: inherit
+}
+
+.card>.list-group:first-child {
+  border-top-width: 0
+}
+
+.card>.list-group:last-child {
+  border-bottom-width: 0
+}
+
+.card>.card-header+.list-group, .card>.list-group+.card-footer {
+  border-top: 0
+}
+
+.text-center {
+  text-align: center!important
+}
+
+.p-1 {
+  padding: .25rem!important
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, .03);
+  border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+.card-title {
+  margin-bottom: .75rem;
+  font-size: 1.25rem;
+}
+
+.card-header, .card-title {
+  color: inherit
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  letter-spacing: 3px
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem
+}
+
+.card-footer {
+  padding: .75rem 1.25rem;
+  background-color: rgba(0, 0, 0, .03);
+  border-top: 1px solid rgba(0, 0, 0, .125)
+}
+
+.button-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d9534f
+}
+
+.button-danger:hover {
+  color: #fff;
+  background-color: #d23430;
+  border-color: #c9302c
+}
+
+.button-danger:active {
+  color: #fff;
+  background-color: #d23430;
+  outline-color: #EBB2B0;
+  outline-width: .3rem;
+  outline-style: solid;
+  border-radius: 0;
+  outline-offset: -1dip;
+}
+
+.button-group-sm>.button, .button-sm {
+  padding: .5rem 1rem;
+  font-size: .765625rem;
+  line-height: 1.5;
+  border-radius: 0
+}
+
+.button-group-sm>.button, .button-sm {
+  font-size: 10px
+}
